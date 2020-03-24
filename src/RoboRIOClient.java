@@ -5,6 +5,7 @@ package frc.robot;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RoboRIOClient {
 
@@ -17,11 +18,13 @@ public class RoboRIOClient {
 		camera.setResolution(840,680);
 		CvSink cvSink = CameraServer.getInstance.getVideo();
 		Mat source = new Mat();
-				
 	}
 
 	public double roboRIOCameraAlignmentSystemGetAngleToTurn() {
 		cvSink.grabFrame(source);
 		MyVector choice = ProcessImage.processImage(source);
+		SmartDashboard.putNumber("VisionVectorX", choice.getX());	
+		SmartDashboard.putNumber("VisionVectorY", choice.getY());	
+		SmartDashboard.putNumber("VisionVectorAngle", choice.getAngle());
 	}
 }
